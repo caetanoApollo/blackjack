@@ -1,0 +1,27 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico - Blackjack</title>
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Joker_black_02.svg/1200px-Joker_black_02.svg.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>📜 Histórico de Partidas</h1>
+        <div class="historico">
+            {% for partida in historico %}
+            <div class="partida">
+                <span>{{ partida.data }}</span>
+                <strong>{{ partida.resultado }}</strong>
+                <span>R$ {{ partida.aposta }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="/" class="btn-glow">Voltar</a>
+    </div>
+</body>
+
+</html>

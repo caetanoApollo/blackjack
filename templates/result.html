@@ -1,0 +1,68 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado - Blackjack</title>
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Joker_black_02.svg/1200px-Joker_black_02.svg.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="game-info">
+            <p class="saldo">Saldo: 💰 R$ {{ saldo }}</p>
+        </div>
+
+        <h1 class="glow">Resultado da Partida 🎲</h1>
+
+        <div class="game-board">
+            <div class="hand-container dealer-hand">
+                <h2 class="hand-title">Dealer 🃏</h2>
+                <div class="cards dealer-cards">
+                    {% for carta in dealer %}
+                    <div class="card" data-naipe="{{ carta[-1] }}">
+                        {{ cartas[carta] }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <p class="pontuacao">Pontuação: {{ pont_dealer }}</p>
+            </div>
+
+            <div class="hand-container player-hand">
+                <h2 class="hand-title">Sua mão 🧑‍💼</h2>
+                <div class="cards player-cards">
+                    {% for carta in jogador %}
+                    <div class="card" data-naipe="{{ carta[-1] }}">
+                        {{ cartas[carta] }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <p class="pontuacao">Pontuação: {{ pont_jogador }}</p>
+            </div>
+        </div>
+
+        {% if conquista %}
+        <div class="conquista-unlocked">
+            <h3>🏆 Conquista Desbloqueada! 🏆</h3>
+            <p>{{ conquista.nome }}: {{ conquista.desc }}</p>
+        </div>
+        {% endif %}
+
+        <div class="historico-partidas">
+            <h3>Histórico Recente</h3>
+            <ul>
+                {% for partida in historico %}
+                <li>[{{ partida.data }}] {{ partida.resultado }} (R$ {{ partida.aposta }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="actions">
+            <a href="/" class="btn-glow">Jogar Novamente 🔁</a>
+            <a href="/reset" class="btn-glow reset-btn">Novo Jogo 🆕</a>
+        </div>
+    </div>
+</body>
+
+</html>

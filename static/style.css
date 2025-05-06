@@ -1,0 +1,315 @@
+:root {
+    --primary-color: #ff66cc;
+    --secondary-color: #6600ff;
+    --card-width: 120px;  
+    --card-height: 180px; 
+    --card-font-size: 10rem;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0d0d0d;
+    background-image: radial-gradient(circle at center, #1a1a1a 0%, #0d0d0d 100%);
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+li {
+    list-style: none;
+    margin-bottom: 1rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    background-color: rgba(26, 26, 26, 0.9);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255, 102, 204, 0.3);
+    max-width: 800px;
+    width: 90%;
+    border: 1px solid rgba(255, 102, 204, 0.2);
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    gap: 20rem;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+form input{
+    width: 50%;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.dealer-cards {
+    margin-bottom: 2rem;
+}
+
+.player-cards {
+    margin-top: 1rem;
+}
+
+.card {
+    width: var(--card-width);
+    height: var(--card-height);
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+    border-radius: 15px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: var(--card-font-size);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 1rem;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { transform: rotate(30deg) translate(-30%, -30%); }
+    100% { transform: rotate(30deg) translate(30%, 30%); }
+}
+
+.card.flip:hover {
+    transform: translateY(-10px) rotateY(10deg);
+    box-shadow: 0 10px 20px rgba(255, 102, 204, 0.5);
+}
+
+.card.virada {
+    background: linear-gradient(135deg, #444, #333);
+    color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button.btn-glow, a.btn-glow {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 0 15px var(--primary-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    min-width: 120px;
+}
+
+.hit-btn {
+    --primary-color: #4CAF50;
+    --secondary-color: #2E7D32;
+}
+
+.stand-btn {
+    --primary-color: #f44336;
+    --secondary-color: #c62828;
+}
+
+button.btn-glow:hover, a.btn-glow:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--primary-color);
+}
+
+.resultado{
+    padding: 15px;
+}
+
+.saldo, .aposta, .resultado-texto {
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+    color: #e0e0e0;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.pontuacao {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.game-board {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.flash-message {
+    animation: fadeOut 1.5s ease-in-out forwards;
+    opacity: 1;
+    color: #4CAF50;
+    margin: 10px 0;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateY(0); }
+    70% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+
+.hand-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 300px;
+}
+
+.hand-title {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.dealer-hand .hand-title {
+    color: #ff6666; 
+}
+
+.player-hand .hand-title {
+    color: #66ccff; 
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0;
+}
+
+.card {
+    width: var(--card-width);
+    height: var(--card-height);
+}
+
+.conquista {
+    border: 2px solid #444;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+}
+
+.conquista.desbloqueada {
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.conquista.bloqueada {
+    opacity: 0.6;
+}
+
+.partida {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-bottom: 1px solid #333;
+    width: 25rem;
+}
+
+.game-menu {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .game-board {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .hand-container {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+        box-shadow: 0 0 10px var(--primary-color);
+    }
+    to {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px var(--primary-color);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    :root {
+        --card-width: 60px;
+        --card-height: 90px;
+    }
+    
+    .card {
+        font-size: 2rem;
+    }
+    
+    .actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    button.btn-glow, a.btn-glow {
+        width: 100%;
+    }
+}

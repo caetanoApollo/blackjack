@@ -1,0 +1,62 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partida - Blackjack</title>
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Joker_black_02.svg/1200px-Joker_black_02.svg.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="game-info">
+            <p class="saldo">Saldo: 💰 R$ {{ saldo }}</p>
+            <p class="aposta">Aposta: 💵 R$ {{ aposta }}</p>
+        </div>
+
+        <div class="game-board">
+            <div class="hand-container dealer-hand">
+                <h2 class="hand-title">Dealer 🃏</h2>
+                <div class="cards dealer-cards">
+                    <div class="card" data-naipe="{{ dealer[0][-1] if dealer[0] != '??' else '' }}">
+                        {{ cartas[dealer[0]] if dealer[0] != '??' else '🂠' }}
+                    </div>
+                    <div class="card" data-naipe="{{ dealer[1][-1] if dealer[1] != '??' else '' }}">
+                        {{ cartas[dealer[1]] if dealer[1] != '??' else '🂠' }}
+                    </div>
+                </div>
+                <p class="pontuacao">Pontuação: {{ pontuacao_dealer if dealer[1] != '??' else '?' }}</p>
+            </div>
+
+            <div class="hand-container player-hand">
+                <h2 class="hand-title">Sua mão 🧑‍💼</h2>
+
+                {% if request.args.get('updated') %}
+                <div class="flash-message">Carta adicionada!</div>
+                {% endif %}
+                
+                <div class="cards player-cards">
+                    {% for carta in jogador %}
+                    <div class="card" data-naipe="{{ carta[-1] }}">
+                        {{ cartas[carta] }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <p class="pontuacao">Pontuação: {{ pontuacao }}</p>
+            </div>
+        </div>
+
+        <div class="actions">
+            <form action="/acao" method="POST">
+                <button type="submit" name="acao" value="Hit" class="btn-glow hit-btn">Hit 🃏</button>
+                <button type="submit" name="acao" value="Stand" class="btn-glow stand-btn">Stand ✋</button>
+                {% if pode_double and jogador|length == 2 %}
+                <button type="submit" name="acao" value="Double" class="btn-glow double-btn">Double ⏫</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

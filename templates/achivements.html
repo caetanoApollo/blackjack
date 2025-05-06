@@ -1,0 +1,27 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conquistas - Blackjack</title>
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Joker_black_02.svg/1200px-Joker_black_02.svg.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>🏆 Conquistas</h1>
+        <div class="conquistas">
+            {% for key, conquista in conquistas.items() %}
+            <div class="conquista {% if conquista.desbloqueada %}desbloqueada{% else %}bloqueada{% endif %}">
+                <h3>{{ conquista.nome }}</h3>
+                <p>{{ conquista.desc }}</p>
+                <span>{% if conquista.desbloqueada %}✅ Desbloqueada{% else %}🔒 Bloqueada{% endif %}</span>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="/" class="btn-glow">Voltar</a>
+    </div>
+</body>
+
+</html>

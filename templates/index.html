@@ -1,0 +1,30 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Joker_black_02.svg/1200px-Joker_black_02.svg.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="glow">BlackJack</h1>
+
+        <p class="saldo">Saldo: 💰 R$ {{ saldo }}</p>
+
+        <div class="game-menu">
+            <a href="/instrucoes" class="btn-glow">Instruções</a>
+            <a href="/conquistas" class="btn-glow">Conquistas</a>
+            <a href="/historico" class="btn-glow">Histórico</a>
+        </div>
+
+        <form action="/apostar" method="POST">
+            <input type="number" name="aposta" placeholder="Digite sua aposta" min="1" required>
+            <button class="btn-glow" type="submit">Apostar</button>
+        </form>
+    </div>
+</body>
+
+</html>
